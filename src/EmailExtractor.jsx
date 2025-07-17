@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Search, Mail, AlertCircle, Copy, CheckCircle } from "lucide-react";
+import {
+  Search,
+  Mail,
+  AlertCircle,
+  Copy,
+  CheckCircle,
+  Undo2,
+} from "lucide-react";
 
 export default function EmailExtractor() {
   const [url, setUrl] = useState("");
@@ -80,13 +87,25 @@ export default function EmailExtractor() {
     }
   };
 
+  const resetEmailHandler = () => {
+    setEmails([]);
+    setUrl("");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Email Extractor
-          </h1>
+          <div className="flex items-center justify-center gap-1 mb-3">
+            <img
+              src="/vite.svg"
+              alt="My Icon"
+              className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px]"
+            />
+            <h1 className="sm:text-4xl text-2xl font-bold text-gray-800">
+              Email Extractor
+            </h1>
+          </div>
           <p className="text-gray-600">
             Extract email addresses from any webpage
           </p>
@@ -120,23 +139,36 @@ export default function EmailExtractor() {
               </div>
             </div>
 
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
-            >
-              {loading ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  <span>Extracting...</span>
-                </>
-              ) : (
-                <>
-                  <Mail className="h-5 w-5" />
-                  <span>Extract Emails</span>
-                </>
+            <div className="flex gap-2">
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Extracting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Mail className="h-5 w-5" />
+                    <span>Extract Emails</span>
+                  </>
+                )}
+              </button>
+              {emails.length > 0 && (
+                <button
+                  onClick={resetEmailHandler}
+                  className="w-half bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <>
+                    <Undo2 className="h-5 w-5" />
+                    <span>Reset</span>
+                  </>
+                </button>
               )}
-            </button>
+            </div>
           </div>
 
           {error && (
@@ -150,7 +182,7 @@ export default function EmailExtractor() {
         {emails.length > 0 && (
           <div className="bg-white rounded-xl shadow-lg p-8 max-h-[40vh] overflow-auto">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="sm:text-2xl text-xl font-bold text-gray-800">
                 Found {emails.length} Email{emails.length !== 1 ? "s" : ""}
               </h2>
               <button
