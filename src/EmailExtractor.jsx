@@ -99,7 +99,7 @@ export default function EmailExtractor() {
                 htmlFor="url"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Website URL
+                Webpage URL
               </label>
               <div className="relative">
                 <input
@@ -148,7 +148,7 @@ export default function EmailExtractor() {
         </div>
 
         {emails.length > 0 && (
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-white rounded-xl shadow-lg p-8 max-h-[40vh] overflow-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Found {emails.length} Email{emails.length !== 1 ? "s" : ""}
