@@ -203,6 +203,20 @@ export default function EmailExtractor() {
           </div>
         )}
       </div>
+      <footer className="mt-16 text-center">
+        <p className="text-gray-600">
+          © 2025{" "}
+          <a
+            href="https://haris-ejaz-portfolio.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          >
+            Haris Ejaz
+          </a>{" "}
+          All rights reserved
+        </p>
+      </footer>
     </div>
   );
 }
